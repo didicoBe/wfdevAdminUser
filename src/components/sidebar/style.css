@@ -1,0 +1,52 @@
+.sidebar{
+    position: fixed;
+    height: 100%;
+    background-color: #b24b90;
+    margin-top: 16px;
+    width: 300px;
+}
+
+.sidebar-int{
+    margin: 25px;
+    height: 85%;
+    background: rgb(178,75,144);
+    background: linear-gradient(180deg, rgba(178,75,144,1) 0%, rgba(178,75,144,1) 45%, rgba(220,98,155,1) 100%);
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0px #00000094;
+}
+
+.line{
+    margin: auto;
+    width: 80%;
+    border-top: 1px solid #fff;
+}
+.menu{
+    padding-top: 30px;
+    padding-left: 20px;
+    font-size: 21px;
+    color: #fff;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+li {
+    padding: 10px;
+    cursor: pointer;
+}
+.iconeSidebar{
+    margin-right: 10px;
+}
+.removeStilo{
+    color: #fff !important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.copy{
+    color: #fff;
+    margin-top: -13px;
+    margin-left: 21px;
+    font-size: 12px;
+}
