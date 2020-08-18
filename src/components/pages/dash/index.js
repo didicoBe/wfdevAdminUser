@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Container,Card,Col, Row,ListGroup  } from 'react-bootstrap';
 import Sidebar from "../../sidebar";
 import Topo from "../../top";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar, faChartPie, faChartArea, faEye } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,10 +28,10 @@ export default class Dash extends Component {
                 <Topo
                     pagina="Dashboard"
                 />
-                <Sidebar/>
+                <Sidebar className=" d-none d-md-block"/>
                 <Container className="corpo">
                    <div className="TituloTopoCorpo">Bem vindo Fulado</div>
-                   <div style={{display:'flex',}}>
+                   <div style={{display:'flex',flexWrap:'wrap'}}>
                        <div className="cardHome">
                            <div>Projetos Finalizados</div>
                            <div style={{display:'flex',alignItems:'center'}}>
@@ -62,69 +63,113 @@ export default class Dash extends Component {
                                     <ListGroup.Item >
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Cras justo odio</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>                                            
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>                                            
                                         </div>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Dapibus ac facilisis in</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>                                        
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Morbi leo risus</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>
                                         
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Porta ac consectetur ac</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Cras justo odio</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>                                            
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>                                            
                                         </div>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Dapibus ac facilisis in</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>                                        
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Morbi leo risus</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>
                                         
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Porta ac consectetur ac</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Cras justo odio</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>                                            
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>                                            
                                         </div>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Dapibus ac facilisis in</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>                                        
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                                             <div>Morbi leo risus</div>
-                                            <div><FontAwesomeIcon icon={faEye} color="white" className={ ""}/></div>
+                                            <div>
+                                                <Link to="#" className="removeStilo">
+                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                </Link>
+                                            </div>
                                         </div>
                                         
                                     </ListGroup.Item>

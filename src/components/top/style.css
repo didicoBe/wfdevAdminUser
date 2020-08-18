@@ -20,3 +20,45 @@
     font-size: 30px;
     color: #fff;
 }
+
+.meulogo{
+    max-height: 55px;
+    margin-left: 90px;
+}
+
+.baseMenuMobile{
+    padding: 15px;
+}
+.itemmenumobile{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.navbar-light .navbar-toggler {
+    color: rgb(255 255 255) !important;
+    border-color: rgb(255 255 255 / 10%) !important;
+}
+.navbar-light .navbar-toggler-icon {
+    background-image: url(/img/ellipsis-h-solid.png) !important;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.popoverTopo{
+    background-color: #b24b90 !important;
+    padding: 15px;
+    color: #fff;
+    font-size: 18px !important;
+    font-family: 'OCR-ABTRegular'!important;
+}
+
+@media only screen and (max-width: 768px) {
+    .TituloTopo{
+        margin-left: -65px;
+        font-size: 18px;
+        
+    }
+    .meulogo{
+        margin-left: 0px;
+    }
+   
+  }

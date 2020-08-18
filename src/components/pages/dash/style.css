@@ -5,8 +5,8 @@
 
 .corpo{
     margin-top: 40px;
-    margin-left: 315px !important;
-    position: relative;
+    position: absolute;
+    left: 310px;
 }
 .cardHome{
     padding-top: 15px;
@@ -41,3 +41,12 @@
     
     color:#fff
 }
+
+
+@media only screen and (max-width: 768px) {
+    .corpo{
+        margin-top:30px;
+        position: absolute;
+        left: 0px;
+    }
+  }

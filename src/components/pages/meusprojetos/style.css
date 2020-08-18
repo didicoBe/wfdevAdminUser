@@ -1,0 +1,55 @@
+.cardMeusProjetos{
+    background-color: #b1499e;
+    border-radius: 10px;
+    color: #fff;
+    margin-top: 5px;
+    margin-right: 25px;
+    box-shadow: 1px 1px 6px 0px #3c3a3acc;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-width: 250px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.iconeProjCard{
+    font-size: 75px;
+    margin: 15px;
+}
+
+.textoValorcardProj{
+    font-size: 30px;
+    position: relative;
+    line-height: 1;
+}
+
+.formProj{
+    padding: 25px;
+}
+
+.btnWFSAlvar{
+    background-color: #fff !important;
+    border-radius: 8px !important;
+    border: 0px !important;
+    padding: 10px !important;
+    color: #3d393a !important;
+    font-size: 19px !important;
+    align-items: center;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+.iconeBtnSalvar{
+    color:#3d393a
+}
+
+.iconeFormPRoj{
+    color: #fff;
+    font-size: 65px;
+    margin: 15px;
+}
+
+.input-group-text {
+    color: #ffffff !important;
+    background-color: #e9ecef00 !important;
+    border: 1px solid #ced4da00 !important;
+}

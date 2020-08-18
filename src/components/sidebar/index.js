@@ -88,9 +88,8 @@ export default class Sidebar extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
-            <div className="sidebar ">
+            <div className="sidebar  d-none d-md-block">
                 <div className="line"></div>
                 <div className="sidebar-int">
                     <div className="menu">
@@ -101,17 +100,17 @@ export default class Sidebar extends Component {
                                 </Link>                                
                             </li>
                             <li onMouseOver={()=>this.vamosanimar('meus')}  onMouseLeave={()=>this.pararanima('meus')}>
-                                <Link className="removeStilo">
+                                <Link className="removeStilo" to="/meusprojetos">
                                     <FontAwesomeIcon icon={faTasks} color="white" className={ this.state.meus+" iconeSidebar"}/>Meus Projetos
                                 </Link>
                             </li>
                             <li onMouseOver={()=>this.vamosanimar('sup')}  onMouseLeave={()=>this.pararanima('sup')}>
-                                <Link className="removeStilo">
+                                <Link className="removeStilo" to="/suporte">
                                     <FontAwesomeIcon icon={faHandsHelping} color="white" className={ this.state.sup+" iconeSidebar"}/>Suporte
                                 </Link>
                             </li>
                             <li onMouseOver={()=>this.vamosanimar('sair')}  onMouseLeave={()=>this.pararanima('sair')}>
-                                <Link className="removeStilo" onClick={()=>this.sair()}>
+                                <Link className="removeStilo" onClick={()=>this.sair()} to="#">
                                     <FontAwesomeIcon icon={faSignOutAlt} color="white" className={ this.state.sair+" iconeSidebar"}/>Sair
                                 </Link>
                             </li>
