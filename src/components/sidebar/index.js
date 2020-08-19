@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faColumns, faTasks, faHandsHelping, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import  api from "../../service";
 
 import "animate.css"
@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
         dash : '',
         meus:'',
         sup:'',
-        sair:''
+        logado:true
     }
 
 
@@ -31,58 +31,24 @@ export default class Sidebar extends Component {
     }
 
     sair = async()=>{
-        const login = localStorage.getItem('login');
-        const token = localStorage.getItem('token');
+       const login = localStorage.getItem('login');
+       const token = localStorage.getItem('token');
         
        const retorno =  await api.get('/logout/'+login+'/'+token).then(response=>{
-            //localStorage.clear();
-            console.log(login)
-            console.log(token)
-            return true
+            localStorage.clear();
+            this.setState({
+                logado:false
+            })
             
         }).catch(e=>{
-            
-            
-            console.log(e);
+             console.log(e);
             return false
         })
 
-        if(retorno){
-            localStorage.clear();
-            this.setState({sair:true})
-            
-        }else{
-           console.log("erro")
-        }
+        
     }
 
-    validaOnline = ()=>{
-        const login = localStorage.getItem('login');
-        const token = localStorage.getItem('token');
-        const nome = localStorage.getItem('nome');
-
-        if(login === null || token === null){
-            // this.setState({
-            //     logado: false,
-            //     nome:''
-            // })
-            // return resposta
-            this.props.history.push('/')
-        }else{
-           api.get('/login/valida/'+login+'/'+token).then(response=>{
-                this.setState({
-                    logado: true,
-                    nome:nome
-                })
-                return  true
-            }).catch((erro)=>{
-                this.props.history.push('/')
-            })
-            
-        }
-    }
-
-
+   
     componentDidMount(){
         //this.validaOnline()
     }
@@ -90,6 +56,7 @@ export default class Sidebar extends Component {
     render() {
         return (
             <div className="sidebar  d-none d-md-block">
+                {this.state.logado ? '' : <Redirect push to="/" />}
                 <div className="line"></div>
                 <div className="sidebar-int">
                     <div className="menu">

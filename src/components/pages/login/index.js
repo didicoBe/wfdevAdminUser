@@ -34,7 +34,6 @@ export default class Login extends Component {
             localStorage.setItem('login', response.data.response[0].email);
             localStorage.setItem('token', response.data.response[0].token);
             localStorage.setItem('nome', response.data.response[0].nome);
-            localStorage.setItem('id', response.data.response[0].id);
             return(
                 this.props.history.push('/dash')
             )
@@ -61,10 +60,12 @@ export default class Login extends Component {
 
         var resposta = false
 
-
         
         if(login === null || token === null){
-            return resposta
+            this.setState({
+                logado: false,
+                nome:nome
+            })
 
         }else{
             resposta = api.get('/login/valida/'+login+'/'+token).then(response=>{
@@ -72,16 +73,7 @@ export default class Login extends Component {
                     logado: true,
                     nome:nome
                 })
-                toast.success('😁 Seja bem vindo(a) '+nome, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    });
-
+                
                 return  true
             }).catch((erro)=>{
                 this.setState({
@@ -91,7 +83,6 @@ export default class Login extends Component {
                 return false
             })
     
-            return resposta
             
         }
 

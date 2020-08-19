@@ -51,6 +51,24 @@
     font-family: 'OCR-ABTRegular'!important;
 }
 
+
+
+.bolinhaAviso{
+    padding: 5px;
+    width: 10px;
+    background-color: red;
+    position: relative;
+    left: 8px;
+    top: 25px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px black;
+    margin-top: -10px;
+}
+
+.removeAviso{
+    display: none;
+}
+
 @media only screen and (max-width: 768px) {
     .TituloTopo{
         margin-left: -65px;

@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import {Navbar , Image,OverlayTrigger,Popover } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell,faColumns, faTasks, faHandsHelping, faSignOutAlt,faIdBadge, faExclamation } from '@fortawesome/free-solid-svg-icons'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import  api from "../../service";
+import { ToastContainer ,toast } from "react-toastify";
 
 import "./style.css"
 
 export default class Topo extends Component {
     state = {
-        expanded:false
+        expanded:false,
+        nome:'',
+        logado:true
     }
 
     handleClick = ()=>{
@@ -18,16 +22,70 @@ export default class Topo extends Component {
     }
 
     componentDidMount(){
+        this.validaOnline()
         document.body.addEventListener('click', this.handleClick);
     }
 
+    validaOnline = ()=>{
+        const login = localStorage.getItem('login');
+        const token = localStorage.getItem('token');
+        const nome = localStorage.getItem('nome');
 
+        var resposta = false
+
+
+        
+        if(login === null || token === null){
+            this.setState({
+                logado: false,
+                nome:nome
+            })
+        }else{
+            resposta = api.get('/login/valida/'+login+'/'+token).then(response=>{
+                this.setState({
+                    logado: true,
+                    nome:nome
+                })
+                
+                return  true
+            }).catch((erro)=>{
+                this.setState({
+                    logado: false,
+                    nome:nome
+                })
+            })
+    
+
+            if(resposta === false){
+                this.setState({
+                    logado: false,
+                    nome:nome
+                })
+            }
+           
+            
+        }
+
+
+
+        
+
+       
+
+
+ 
+    }
+
+
+    
 
 
     render() {
         
         return (
+            
             <div>
+                {this.state.logado ?  '' : <Redirect push to="/" />}
                 <Navbar className="pretoTopo" expand="lg" fixed="top" expanded={this.state.expanded}>
                     <Navbar.Brand href="/dash">
                         <Image src="/img/LogoNEGATIVO2.png" alt="WFDev" fluid className="meulogo"/>
@@ -81,6 +139,7 @@ export default class Topo extends Component {
 
 
                         <Navbar.Text className="usuarioTopo d-none d-md-block">
+                            <div className="bolinhaAviso "></div>
                             <OverlayTrigger trigger="click" placement="bottom"  rootClose 
                                 overlay={
                                     <Popover className="popoverTopo">
