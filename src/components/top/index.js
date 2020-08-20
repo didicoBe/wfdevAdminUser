@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell,faColumns, faTasks, faHandsHelping, faSignOutAlt,faIdBadge, faExclamation } from '@fortawesome/free-solid-svg-icons'
 import { Link, Redirect } from "react-router-dom";
 import  api from "../../service";
-import { ToastContainer ,toast } from "react-toastify";
 
 import "./style.css"
 
@@ -12,7 +11,8 @@ export default class Topo extends Component {
     state = {
         expanded:false,
         nome:'',
-        logado:true
+        logado:true,
+        avatar:'http://wfdesenvolvimento.com.br/img/uploads/default.png'
     }
 
     handleClick = ()=>{
@@ -30,6 +30,7 @@ export default class Topo extends Component {
         const login = localStorage.getItem('login');
         const token = localStorage.getItem('token');
         const nome = localStorage.getItem('nome');
+        const avatar = localStorage.getItem('avatar');
 
         var resposta = false
 
@@ -44,7 +45,8 @@ export default class Topo extends Component {
             resposta = api.get('/login/valida/'+login+'/'+token).then(response=>{
                 this.setState({
                     logado: true,
-                    nome:nome
+                    nome:nome,
+                    avatar:avatar
                 })
                 
                 return  true
@@ -102,7 +104,7 @@ export default class Topo extends Component {
                                     </Link> 
                                 </div>
                                 <div className="itemmenumobile">
-                                    <Link to='#' style={{color:"#fff",display:'flex', alignItems:'center',flexWrap:'wrap'}}>
+                                    <Link to='/config' style={{color:"#fff",display:'flex', alignItems:'center',flexWrap:'wrap'}}>
                                         <FontAwesomeIcon icon={faIdBadge} color="white" className="configTopo" /> Minha Conta
                                     </Link> 
                                 </div>
@@ -132,12 +134,6 @@ export default class Topo extends Component {
 
 
 
-
-
-
-
-
-
                         <Navbar.Text className="usuarioTopo d-none d-md-block">
                             <div className="bolinhaAviso "></div>
                             <OverlayTrigger trigger="click" placement="bottom"  rootClose 
@@ -156,13 +152,13 @@ export default class Topo extends Component {
                             <OverlayTrigger trigger="click" placement="bottom" rootClose 
                                 overlay={
                                     <Popover className="popoverTopo">
-                                        <Link to='#' style={{color:"#fff",display:'flex', alignItems:'center',flexWrap:'wrap'}} >
+                                        <Link to='/config' style={{color:"#fff",display:'flex', alignItems:'center',flexWrap:'wrap'}} >
                                             <FontAwesomeIcon icon={faIdBadge} color="white" className="configTopo" /> Minha Conta
                                         </Link>
                                     </Popover>
                             }>
                                 <div >
-                                    <img alt='avatar' src="https://bain.design/wp-content/uploads/2013/03/People-Avatar-Set-Rectangular-13.jpg" className="avatar"/>
+                                    <img alt='avatar' src={this.state.avatar} className="avatar"/>
                                 </div>
                             </OverlayTrigger>
                                

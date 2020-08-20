@@ -5,6 +5,7 @@ import Topo from "../../top";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faFolderOpen, faFolder} from '@fortawesome/free-solid-svg-icons'
+import  api from "../../../service";
 
 import Lottie from 'lottie-react-web';
 import animation from '../../../animation/drawkit-grape-animation-2-LOOP.json';
@@ -18,7 +19,9 @@ export default class Meusprojetos extends Component {
     state={
         novo:'',
         aberto:'',
-        fechado:''
+        fechado:'',
+        mostra:'none',
+        permissao:''
     }
 
 
@@ -35,6 +38,32 @@ export default class Meusprojetos extends Component {
     }
 
 
+    pegaId= async(email,token)=>{
+        
+        await api.get('/usuario/idCliente/'+email+'/'+token).then(response=>{
+
+              this.setState({
+                permissao:response.data[0].permissao
+              })
+              if(this.state.permissao === 'admin' || this.state.permissao === 'agencia'){
+                  this.setState({
+                      mostra:''
+                  })
+              }
+          }).catch(e=>{
+               console.log(e);
+          })   
+      }
+
+
+    
+    componentDidMount(){
+        const email = localStorage.getItem('login')
+        const token = localStorage.getItem('token')
+        this.pegaId(email,token)
+    }
+
+
 
     render() {
         return (
@@ -45,7 +74,7 @@ export default class Meusprojetos extends Component {
                 <Sidebar/>
                 <Container className="corpo">
                     <Row>
-                        <Col md={3} style={{marginTop:15}}>
+                        <Col md={3} style={{marginTop:15, display:this.state.mostra}}>
                             <Link to="/novoprojeto" className={"removeStilo "} onMouseOver={()=>this.vamosanimar('novo')}  onMouseLeave={()=>this.pararanima('novo')}>
                             <div className="cardMeusProjetos">
                                 <div style={{display:'flex',alignItems:'center'}}>

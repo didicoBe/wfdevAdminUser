@@ -34,6 +34,7 @@ export default class Login extends Component {
             localStorage.setItem('login', response.data.response[0].email);
             localStorage.setItem('token', response.data.response[0].token);
             localStorage.setItem('nome', response.data.response[0].nome);
+            localStorage.setItem('avatar', response.data.response[0].avatar);
             return(
                 this.props.history.push('/dash')
             )
@@ -58,7 +59,6 @@ export default class Login extends Component {
         const token = localStorage.getItem('token');
         const nome = localStorage.getItem('nome');
 
-        var resposta = false
 
         
         if(login === null || token === null){
@@ -68,7 +68,7 @@ export default class Login extends Component {
             })
 
         }else{
-            resposta = api.get('/login/valida/'+login+'/'+token).then(response=>{
+            api.get('/login/valida/'+login+'/'+token).then(response=>{
                 this.setState({
                     logado: true,
                     nome:nome

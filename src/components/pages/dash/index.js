@@ -9,6 +9,7 @@ import { faChartBar, faChartPie, faChartArea, faEye } from '@fortawesome/free-so
 
 import Lottie from 'lottie-react-web';
 import animation from '../../../animation/drawkit-grape-animation-7-LOOP.json';
+import animation2 from '../../../animation/9513-preloader.json';
 
 
 import './style.css'
@@ -26,7 +27,8 @@ export default class Dash extends Component {
         dataProj : [],        
         ProjFin: 0,
         ProjAb: 0,
-        TicketsAb:0
+        TicketsAb:0,
+        loading: true
     }
 
     pegaId= async(email,token)=>{
@@ -36,6 +38,7 @@ export default class Dash extends Component {
                 idCliente:response.data[0].idcliente
             })
             this.pegaProjetos(response.data[0].idcliente)
+            this.pegaTickets(response.data[0].idcliente)
         }).catch(e=>{
              console.log(e);
         })   
@@ -43,23 +46,34 @@ export default class Dash extends Component {
 
     pegaProjetos = async(idCliente)=>{
         await api.get('/projeto/'+idCliente).then(response=>{
-            var Finalizado = response.data.filter(data => data.status == 'Finalizado')
-            var Andamento = response.data.filter(data => data.status != 'Finalizado')
+            var Finalizado = response.data.filter(data => data.status === 'Finalizado')
+            var Andamento = response.data.filter(data => data.status !== 'Finalizado')
 
-            console.log(response)
             this.setState({
                 dataProj:response.data,
                 ProjFin:Finalizado.length,
                 ProjAb: Andamento.length
             })
+
+            if(response.data.length > 0){
+                this.setState({loading:false})
+            }
             
         }).catch(e=>{
              console.log(e);
         })  
     }
 
-    pegaTickets = ()=>{
-        
+    pegaTickets = async(idCliente)=>{
+        await api.get('/suporte/'+idCliente).then(response=>{
+            var Andamento = response.data.filter(data => data.status !== 'Resolvido')
+            this.setState({
+                TicketsAb:Andamento.length,
+            })
+            
+        }).catch(e=>{
+             console.log(e);
+        })  
     }
 
     componentDidMount(){
@@ -72,13 +86,26 @@ export default class Dash extends Component {
             token: token
         })
         this.pegaId(email,token)
-        this.pegaTickets()
 
 
     }
 
 
     render() {
+        var loading = ''
+        if(this.state.loading === true){
+            loading =  
+                    <div style={{width:150,margin:'auto'}}>
+                        <Lottie
+                            options={{
+                            animationData: animation2
+                            }}
+                            
+                        />
+                    </div>
+        }
+
+
         return (
             <div style={{marginTop:'66px', display:'flex'}}>
                 <Topo
@@ -116,6 +143,7 @@ export default class Dash extends Component {
                             <Card>
                                 <Card.Body>
                                     <ListGroup variant="flush">
+                                        {loading}
                                         {
                                             this.state.dataProj.map((resultado,i)=>{
                                                 return(

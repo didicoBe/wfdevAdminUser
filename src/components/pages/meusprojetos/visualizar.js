@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import {Container,Col, Row,Form,ProgressBar  } from 'react-bootstrap';
+import {Container,Col, Row,ProgressBar  } from 'react-bootstrap';
 import Sidebar from "../../sidebar";
 import Topo from "../../top";
-import { Link } from "react-router-dom";
 import  api from "../../../service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLaptopCode, faCaretSquareUp, faFolder} from '@fortawesome/free-solid-svg-icons'
+import { faLaptopCode, faCaretSquareUp} from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faGoogleDrive } from '@fortawesome/free-brands-svg-icons'
 
 
@@ -16,16 +15,27 @@ import './style.css'
 export default class VisualizarProj extends Component {
 
     state={
-        data:[]
+        data:[],
+        historico: [],
+        idCliente: ''
     }
+    pegaId= async(email,token)=>{
+        
+        await api.get('/usuario/idCliente/'+email+'/'+token).then(response=>{
+              this.setState({
+                  idCliente:response.data[0].idcliente
+              })
+              this.pegadadosProj(response.data[0].idcliente)
+              this.pegahistoricoProj(response.data[0].idcliente)
+          }).catch(e=>{
+               console.log(e);
+          })   
+      }
 
-
-    pegadadosProj = async()=>{
+    pegadadosProj = async(idcliente)=>{
         //projeto/unico/{id}
         const idProj  = this.props.match.params.id
-        await api.get('/projeto/unico/'+idProj).then(response=>{
-           
-            console.log(response.data[0])
+        await api.get('/projeto/unico/'+idProj+'/'+idcliente).then(response=>{
             this.setState({
                 data:response.data[0],
             })
@@ -35,9 +45,23 @@ export default class VisualizarProj extends Component {
         })  
     }
 
+    pegahistoricoProj = async(idcliente)=>{
+        const idProj  = this.props.match.params.id
+        await api.get('/projeto-historico/'+idProj+'/'+idcliente).then(response=>{
+            this.setState({
+                historico:response.data,
+            })
+            
+        }).catch(e=>{
+             console.log(e);
+        })  
+    }
+
 
     componentDidMount(){
-        this.pegadadosProj()
+        const email = localStorage.getItem('login')
+        const token = localStorage.getItem('token')
+        this.pegaId(email,token)
     }
 
 
@@ -52,7 +76,7 @@ export default class VisualizarProj extends Component {
                    <div className="TituloTopoCorpo" style={{marginBottom:25}}>Projeto - {this.state.data.nome}</div>
                    <Row>
                        <Col md={4}>
-                           <a href={this.state.data.github} style={{textDecoration:'none'}} target="_blank">
+                           <a href={this.state.data.github} style={{textDecoration:'none'}} target="_blank" rel="noreferrer">
                            <div className="cardMeusProjetos">
                                 <div style={{display:'flex',alignItems:'center',padding:15,paddingLeft:25,paddingRight:25 }}>
                                     <div><FontAwesomeIcon icon={faGithub} color="white" className={ "iconeViCard"}/></div>
@@ -62,7 +86,7 @@ export default class VisualizarProj extends Component {
                             </a>
                        </Col>
                        <Col md={4}>
-                           <a href={this.state.data.GoogleDrive} style={{textDecoration:'none'}} target="_blank">
+                           <a href={this.state.data.GoogleDrive} style={{textDecoration:'none'}} target="_blank" rel="noreferrer">
                            <div className="cardMeusProjetos">
                                 <div style={{display:'flex',alignItems:'center',padding:15,paddingLeft:25,paddingRight:25 }}>
                                     <div><FontAwesomeIcon icon={faGoogleDrive} color="white" className={ "iconeViCard"}/></div>
@@ -72,7 +96,7 @@ export default class VisualizarProj extends Component {
                             </a>
                        </Col>
                        <Col md={4}>
-                           <a href={this.state.data.vercel} style={{textDecoration:'none'}} target="_blank">
+                           <a href={this.state.data.vercel} style={{textDecoration:'none'}} target="_blank" rel="noreferrer">
                            <div className="cardMeusProjetos">
                                 <div style={{display:'flex',alignItems:'center',padding:15,paddingLeft:25,paddingRight:25 }}>
                                     <div><FontAwesomeIcon icon={faCaretSquareUp} color="white" className={ "iconeViCard"}/></div>
@@ -117,17 +141,24 @@ export default class VisualizarProj extends Component {
                             <div className="cxVisualizar" >    
                                 <div style={{overflow:'overlay',maxHeight:300,paddingRight:25}} id='style-2'>
 
+                                    { this.state.historico.map((response, i)=>{
+                                        return(
+                                            <div key={i}>
+                                                <div style={{display:'flex', justifyContent:"space-between",fontWeight:900}}>
+                                                <div>{response.status} - {response.usuarioSis}</div>
+                                                    <div>{response.data}</div>
+                                                </div>
+                                                <div style={{marginTop:20}}>
+                                                    {response.mensagem}
+                                                </div>
+                                                <hr/>
+                                            </div>
 
-                                    <div>
-                                        <div style={{display:'flex', justifyContent:"space-between",fontWeight:900}}>
-                                            <div>Titulo - usuarios</div>
-                                            <div>20/08/2020</div>
-                                        </div>
-                                        <div style={{marginTop:20}}>
-                                            alskjdlaksjdkajlkasjdlasjlaskjaksjaslkd
-                                        </div>
-                                        <hr/>
-                                    </div>
+                                        )
+
+
+                                    })}
+                                    
                                     
 
                                 </div>

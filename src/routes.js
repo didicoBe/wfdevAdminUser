@@ -11,6 +11,8 @@ import Suporte from "./components/pages/suporte";
 import Novoticket from "./components/pages/suporte/novo";
 import TicketsEmaberto from "./components/pages/suporte/emaberto";
 import TicketsFinalizados from "./components/pages/suporte/finalizados";
+import TicketsVisualizar from "./components/pages/suporte/visuazliar";
+import Config from "./components/pages/config";
 
 
 
@@ -29,6 +31,9 @@ const Routes = ()=>(
                 <Route exact path="/novoticket" component={Novoticket}></Route>   
                 <Route exact path="/ticketsemaberto" component={TicketsEmaberto}></Route>   
                 <Route exact path="/ticketsfinalizados" component={TicketsFinalizados}></Route>    
+                <Route exact path="/ticketsvisualizar/:id" component={TicketsVisualizar}></Route>   
+                <Route exact path="/config" component={Config}></Route>  
+                
             </Switch>
         </BrowserRouter>
     </div>

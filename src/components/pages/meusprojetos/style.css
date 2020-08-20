@@ -31,6 +31,8 @@
     padding: 15px;
     margin-top: 15px;
     color: #a397a5;
+    max-height: 350px;
+    margin-bottom: 15px;
 }
 #style-2::-webkit-scrollbar-track
 {
@@ -92,4 +94,8 @@
     color: #ffffff !important;
     background-color: #e9ecef00 !important;
     border: 1px solid #ced4da00 !important;
+}
+
+.list-group-item {
+    border: 0px !important
 }

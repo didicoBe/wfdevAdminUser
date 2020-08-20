@@ -34,7 +34,7 @@ export default class Sidebar extends Component {
        const login = localStorage.getItem('login');
        const token = localStorage.getItem('token');
         
-       const retorno =  await api.get('/logout/'+login+'/'+token).then(response=>{
+       await api.get('/logout/'+login+'/'+token).then(response=>{
             localStorage.clear();
             this.setState({
                 logado:false

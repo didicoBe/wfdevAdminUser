@@ -3,6 +3,7 @@
 }
 .usuarioTopo{
     color: #ffffff !important;
+    cursor: pointer;
 }
 .configTopo{
     margin: 10px;

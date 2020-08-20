@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import {Container,Col, Row,Form,Button,Image, InputGroup ,FormControl,ListGroup } from 'react-bootstrap';
+import {Container,Col, Row,Image, InputGroup ,FormControl,ListGroup } from 'react-bootstrap';
 import Sidebar from "../../sidebar";
 import Topo from "../../top";
+import  api from "../../../service";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen,  faSearch, faEye} from '@fortawesome/free-solid-svg-icons'
+import Lottie from 'lottie-react-web';
+import animation2 from '../../../animation/9513-preloader.json';
 
 import SearchResults from 'react-filter-search';
 
@@ -15,7 +18,9 @@ import './style.css'
 export default class ProjetosEmaberto extends Component {
 
     state ={
-        value: ''
+        value: '',
+        data:[],
+        loading:true
     }
 
 
@@ -24,10 +29,58 @@ export default class ProjetosEmaberto extends Component {
         this.setState({ value });
       };
 
+    pegaId= async(email,token)=>{
+        
+      await api.get('/usuario/idCliente/'+email+'/'+token).then(response=>{
+            this.setState({
+                idCliente:response.data[0].idcliente
+            })
+            this.pegaProjetos(response.data[0].idcliente)
+        }).catch(e=>{
+             console.log(e);
+        })   
+    }
 
+
+    pegaProjetos = async(idCliente)=>{
+        await api.get('/projeto/'+idCliente).then(response=>{
+            var Andamento = response.data.filter(data => data.status !== 'Finalizado')
+            this.setState({
+                data:Andamento,
+            })
+
+            if(response.data.length > 0){
+                this.setState({loading:false})
+            }
+            
+        }).catch(e=>{
+             console.log(e);
+        })  
+    }
+
+    componentDidMount(){
+        const email = localStorage.getItem('login')
+        const token = localStorage.getItem('token')
+        this.pegaId(email,token)
+    }
 
 
     render() {
+
+        var loading = ''
+        if(this.state.loading === true){
+            loading =  
+                    <div style={{width:150,margin:'auto'}}>
+                        <Lottie
+                            options={{
+                            animationData: animation2
+                            }}
+                        />
+                    </div>
+        }
+
+
+
         return (
             <div style={{marginTop:'66px', display:'flex'}}>
                 <Topo
@@ -63,50 +116,29 @@ export default class ProjetosEmaberto extends Component {
                                 </div>
                                 <div>
                                     <ListGroup variant="flush">
-                                        <ListGroup.Item >
-                                            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                                <div>Cras justo odio</div>
-                                                <div style={{marginLeft:'-20%'}}>%50</div>
+                                        {loading}
+                                        <SearchResults
+                                            value={this.state.value}
+                                            data={this.state.data}
+                                            renderResults={results => (
                                                 <div>
-                                                    <Link to="#" className="removeStilo">
-                                                        <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
-                                                    </Link>
-                                                </div>                                            
-                                            </div>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item >
-                                            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                                <div>Cras justo odio</div>
-                                                <div style={{marginLeft:'-20%'}}>%50</div>
-                                                <div>
-                                                    <Link to="#" className="removeStilo">
-                                                        <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
-                                                    </Link>
-                                                </div>                                            
-                                            </div>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item >
-                                            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                                <div>Cras justo odio</div>
-                                                <div style={{marginLeft:'-20%'}}>%50</div>
-                                                <div>
-                                                    <Link to="#" className="removeStilo">
-                                                        <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
-                                                    </Link>
-                                                </div>                                            
-                                            </div>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item >
-                                            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                                <div>Cras justo odio</div>
-                                                <div style={{marginLeft:'-20%'}}>%50</div>
-                                                <div>
-                                                    <Link to="#" className="removeStilo">
-                                                        <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
-                                                    </Link>
-                                                </div>                                            
-                                            </div>
-                                        </ListGroup.Item>
+                                                {results.map(el => (
+                                                    <ListGroup.Item key={el.id} >
+                                                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                                                            <div>{el.nome}</div>
+                                                            <div style={{marginLeft:'-20%'}}>%{el.progresso}</div>
+                                                            <div>
+                                                                <Link to={"/visualizarproj/"+el.id} className="removeStilo">
+                                                                    <FontAwesomeIcon icon={faEye} color="white" className={ ""}/>
+                                                                </Link>
+                                                            </div>                                            
+                                                        </div>
+                                                    </ListGroup.Item>
+                                                ))}
+                                                </div>
+                                            )}
+                                            />
+                                        
                                     </ListGroup>
                                 </div>
                                 
