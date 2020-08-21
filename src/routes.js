@@ -21,18 +21,18 @@ const Routes = ()=>(
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login}></Route>
-                <Route exact path="/dash" component={Dash}></Route> 
-                <Route exact path="/meusprojetos" component={Meusprojetos}></Route>   
-                <Route exact path="/novoprojeto" component={Novoprojeto}></Route>  
-                <Route exact path="/projetosemaberto" component={ProjetosEmaberto}></Route>   
-                <Route exact path="/projetosconcluidos" component={ConcluidosProjetos}></Route>  
-                <Route exact path="/visualizarproj/:id" component={VisualizarProj}></Route> 
-                <Route exact path="/suporte" component={Suporte}></Route>        
-                <Route exact path="/novoticket" component={Novoticket}></Route>   
-                <Route exact path="/ticketsemaberto" component={TicketsEmaberto}></Route>   
-                <Route exact path="/ticketsfinalizados" component={TicketsFinalizados}></Route>    
-                <Route exact path="/ticketsvisualizar/:id" component={TicketsVisualizar}></Route>   
-                <Route exact path="/config" component={Config}></Route>  
+                <Route path="/dash" component={Dash}></Route> 
+                <Route path="/meusprojetos" component={Meusprojetos}></Route>   
+                <Route path="/novoprojeto" component={Novoprojeto}></Route>  
+                <Route path="/projetosemaberto" component={ProjetosEmaberto}></Route>   
+                <Route path="/projetosconcluidos" component={ConcluidosProjetos}></Route>  
+                <Route path="/visualizarproj/:id" component={VisualizarProj}></Route> 
+                <Route path="/suporte" component={Suporte}></Route>        
+                <Route path="/novoticket" component={Novoticket}></Route>   
+                <Route path="/ticketsemaberto" component={TicketsEmaberto}></Route>   
+                <Route path="/ticketsfinalizados" component={TicketsFinalizados}></Route>    
+                <Route path="/ticketsvisualizar/:id" component={TicketsVisualizar}></Route>   
+                <Route path="/config" component={Config}></Route>  
                 
             </Switch>
         </BrowserRouter>

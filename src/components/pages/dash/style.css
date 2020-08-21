@@ -5,7 +5,7 @@
 
 .corpo{
     margin-top: 40px;
-    position: absolute;
+    position: fixed;
     left: 310px;
 }
 .cardHome{

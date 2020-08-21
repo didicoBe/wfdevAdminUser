@@ -31,11 +31,14 @@ export default class Config extends Component {
     dadosCliente = async(idCliente)=>{
         //usuario/{idCliente}
         await api.get('/usuario/'+idCliente).then(response=>{
+            
             this.setState({
                 data:response.data[0],
                 login:response.data[0].email,
                 senha: response.data[0].senha
             })
+            
+            localStorage.setItem('avatar', response.data[0].avatar);
             
         }).catch(e=>{
              console.log(e);
