@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 
 export default class Login extends Component {
+
+
     state={
         login:'',
         senha:'',
@@ -105,7 +107,7 @@ export default class Login extends Component {
 
   render() {
 
-
+    
     if(this.state.logado === false){
         return (
             <div style={{paddingTop:'150px'}} className="fundo">

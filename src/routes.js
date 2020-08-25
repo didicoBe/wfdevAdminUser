@@ -33,7 +33,6 @@ const Routes = ()=>(
                 <Route path="/ticketsfinalizados" component={TicketsFinalizados}></Route>    
                 <Route path="/ticketsvisualizar/:id" component={TicketsVisualizar}></Route>   
                 <Route path="/config" component={Config}></Route>  
-                
             </Switch>
         </BrowserRouter>
     </div>
